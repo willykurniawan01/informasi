@@ -10,7 +10,7 @@
                     <div class="card card-profile">
                         <div class="card-body d-flex">
                             <img src="assets/img/user/<?= $account['img'] ?>" style="width:200px; height:200px;" alt="">
-                            <ul>
+                            <ul class="profile">
                                 <li class="mt-3">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="img" name="img">
