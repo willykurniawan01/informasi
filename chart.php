@@ -1,3 +1,1 @@
-<canvas id="myChart">
-
-</canvas>
+<canvas id="myAreaChart"></canvas>

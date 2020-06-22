@@ -12,6 +12,7 @@ if ($_GET["act"] == 'login') {
         //verify password
         if (password_verify($_POST["password"], $user["password"])) {
             $_SESSION["username"] = $user["username"];
+            $_SESSION["img"] = $user["img"];
             header("location:admin.php");
         } else {
             header("location:login.php");
@@ -27,7 +28,7 @@ if ($_GET["act"] == 'register') {
     if (isset($_POST["daftar"])) {
         $username = $_POST['username'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $query = mysqli_query($conn, "INSERT INTO pengguna(username,password) VALUES('$username','$password')");
+        $query = mysqli_query($conn, "INSERT INTO pengguna(username,password,img) VALUES('$username','$password','default.png')");
         $_SESSION["message"] = "Berhasil Membuat Akun !";
         header("location:login.php");
     }
@@ -114,4 +115,25 @@ if ($_GET["act"] == 'update-informasi') {
 
         header("location:admin.php?menu=informasi");
     }
+}
+
+//update profile
+if ($_GET["act"] == 'update-profile') {
+    if (isset($_POST["update-profile"])) {
+        $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+        $last_img = $_POST["last-img"];
+        $ekstensi_diperbolehkan    = array('png', 'jpg');
+        $nama = $_FILES['img']['name'];
+        $x = explode('.', $nama);
+        $ekstensi = strtolower(end($x));
+        $ukuran    = $_FILES['img']['size'];
+        $file_tmp = $_FILES['img']['tmp_name'];
+        if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+            move_uploaded_file($file_tmp, 'assets/img/user/' . $nama);
+            $query = mysqli_query($conn, "UPDATE pengguna SET password='$password',img='$nama'");
+            unlink("assets/img/user/$last_img");
+        }
+    }
+
+    header("Location:admin.php");
 }

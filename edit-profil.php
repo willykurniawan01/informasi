@@ -1,15 +1,41 @@
 <div class="container">
     <div class="row">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
+        <div class="col-10">
+            <?php
+            $username = $_SESSION["username"];
+            $query = mysqli_query($conn, "SELECT * FROM pengguna where username='$username'");
+            ?>
+            <?php while ($account = mysqli_fetch_assoc($query)) : ?>
+                <form action="route.php?act=update-profile" method="POST" enctype="multipart/form-data">
+                    <div class="card card-profile">
+                        <div class="card-body d-flex">
+                            <img src="assets/img/user/<?= $account['img'] ?>" style="width:200px; height:200px;" alt="">
+                            <ul>
+                                <li class="mt-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="img" name="img">
+                                        <label class="custom-file-label" for="img">Ubah Gambar</label>
+                                    </div>
+                                </li>
+                                <li class="mt-3">
+                                    <h4>Username:</h4>
+                                    <h4><?= $account["username"] ?></h4>
+                                </li>
+                                <li class="mt-3">
+                                    <h4>Password:</h4>
+                                    <input type="password" value="<?= $account["username"] ?>" class="form-control" name="password">
+                                </li>
+
+                                <input type="hidden" name="last-img" value="<?= $account["img"] ?>">
+
+                                <li class="mt-3">
+                                    <button class="btn btn-primary" type="submit" name="update-profile" value="update-profile">Simpan Perubahan</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            <?php endwhile; ?>
         </div>
     </div>
 </div>
