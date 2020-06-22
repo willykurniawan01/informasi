@@ -1,10 +1,18 @@
 <div class="container">
     <div class="row">
-        <a href="admin.php?menu=tambah-informasi" class="btn btn-primary">Tambah Data</a>
+        <div class="col-md-3"><a href="admin.php?menu=tambah-informasi" class="btn btn-primary">Tambah Data</a>
+        </div>
+        <div class="col-md-3">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Import Excell</label>
+            </div>
+        </div>
+
     </div>
 
     <div class="row mt-4">
-        <div class="col-8">
+        <div class="col-md-8">
             <table class="table">
                 <thead class="bg-primary text-white">
                     <tr>
@@ -49,7 +57,7 @@
             </table>
         </div>
 
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="card">
                 <h5 class="card-header bg-primary text-white">Kategori Informasi</h5>
                 <div class="card-body">
